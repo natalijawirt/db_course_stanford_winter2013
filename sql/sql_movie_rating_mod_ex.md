@@ -20,13 +20,7 @@ For all movies that have an average rating of 4 stars or higher, add 25 to the r
 ```sql
 update movie
 set year = year + 25
-where mID in (
-  select mID from (
-  select AVG(stars) as astar, mID from Rating
-  where mID=rating.mID
-  group by mID
-  having astar >=4)
-)
+WHERE mid in ( select mid from rating group by mid having avg(stars)>=4)
 ```
 
 Remove all ratings where the movie's year is before 1970 or after 2000, and the rating is fewer than 4 stars.
